@@ -1,0 +1,48 @@
+\documentclass{beamer}
+\usetheme{Rochester}
+
+\usepackage[utf8]{inputenc}
+\usepackage{default}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+
+\begin{document}
+\tikzset{->-/.style={
+	    decoration={markings,
+		mark= at position #1 with {\arrow{>}} ,
+	    },
+	postaction={decorate}
+    }, ->-/.default=0.5
+}
+
+\begin{frame}
+ 
+\begin{tikzpicture}
+
+\draw [->-] (1,-1) -- (0,0);
+\draw [->-] (2,-2) -- (1,-1);
+\draw [->-] (1,-1) -- (0,-2);
+\draw [->-] (2,0) -- (1,-1);
+
+\draw [fill=white] (1,-1) circle [radius=0.2];
+\node at (1,-1) {G};
+
+
+\node at (2.5,-1) {=};
+
+\draw [->-] (5,-0.5) -- (3,-0.5);
+\draw [->-] (5,-1.5) -- (3,-1.5);
+
+\node at (5.5,-1) {$\pm$};
+
+\draw [->-=0.3] (8,-0.5) -- (6,-1.5) ;
+\draw [->-=0.3] (8,-1.5) -- (6,-0.5);
+
+
+\end{tikzpicture}
+
+\end{frame}
+
+
+\end{document}
