@@ -1,6 +1,65 @@
 \section{Introduction}
-\begin{CJK}{UTF8}{min}
+\subsection{Interaction representation}
 
-むすかしむすかし。。。
+Given the Hamiltonian $H=H_0+V$ with $H_0$ and $V$ as noninteracting and interacting part respectively,
+evolution of states and operators are described by following equations
+\[ i\pd{}{t}\ket{\psi_I(t)}=V_I(t)\ket{\psi_I(t)} \]
+\[ -i\pd{O_I(t)}{t}=\comm{H_0}{O_I(t)} \]
 
-\end{CJK}
+with states and operators defined as
+\[ \ket{\psi_I} = e^{i H_0 t}\ket{\psi_S(t)} \]
+\[ O_I(t) = e^{i H_0 t} O_S e^{-i H_0 t} \] 
+
+The evolution of the wavefunction is thus
+
+\[ \ket{\psi_I(t)} = U(t) \ket{\psi_I(0)} \]
+
+so that
+
+\[ i\pd{U(t)}{t} = V(t) U(t) \]
+
+using T-operator we obtain time-ordered exponential
+
+\[ U(t) = T\left[exp\left\{-i\int_{0}^{t}V(t')dt'\right\}\right] \]
+
+\subsection{Finite temperature}
+Switching from $t$ to $i\tau$ with $\tau\in\{0,\beta=\frac{1}{k_B T}\}$ we obtain
+
+\[ U(\tau) = T\left[exp\left\{-\int_{0}^{\tau}V(\tau')d\tau'\right\}\right] \]
+
+We can relate the partition function to the evolution operator as follows
+
+\[ Z = Tr\left[e^{-\beta H}\right] = Z_0\left<U(\beta)\right>_0 \]
+
+where 
+
+\[ Z_0 = Tr\left[e^{-\beta H_0}\right] \]
+
+\[ \left<A\right>_0 = \frac{Tr\left[e^{-\beta H_0}A\right]}{Z_0} \]
+
+Now we can write ratio of the interacting to the non-interacting partition function
+
+\[ \frac{Z}{Z_0} = \langle T\ exp\left[-\int_{0}^{\beta}V(\tau)d\tau\right]\rangle \]
+
+\subsection{Perturbation expansion}
+In most general form interaction is
+\[ V(t) = \tilde{z}(t)c+c^\dagger z(t) \] 
+
+where $z(t)$ and $\tilde{z}(t)$ are the anticommuting forces which ``create'' and ``annihilate'' particles respectively.
+
+Expanding the time-ordered exponential gives us a perturbation series
+
+\[ \frac{Z}{Z_0} = \sum_{n=0}^{\infty}\frac{(-1)^n}{n!}\int_{0}^{\beta}...\int_{0}^{\beta} d\tau_1...d\tau_n 
+    \langle T V(\tau_1)...V(\tau_n) \rangle \]
+
+Taking the logarithm of it yields
+
+\[ \log{\frac{Z}{Z_0}} = \sum_{n=1}^{\infty}\frac{(Z/Z_0-1)^n}{n} = \sum_{n=1}^{\infty}
+  \frac{\sum_{k=1}^{\infty}\frac{(-1)^k}{k!}\int_{0}^{\beta}...\int_{0}^{\beta} d\tau_1...d\tau_k 
+    \langle T V(\tau_1)...V(\tau_k) \rangle}{n} \]
+
+\subsection{Green functions}
+We define n-particle Green function as follows
+
+\[ \G(1..n;1'..n') = (-1)^n\langle T c(1)..c(n)c(1')..c(n')\rangle \]
+

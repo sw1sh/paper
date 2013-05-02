@@ -1,7 +1,7 @@
 %%% Preamble
 \documentclass[paper=a4, fontsize=11pt]{scrartcl}  % Article class of KOMA-script with 11pt font and a4 format
 \usepackage[T1]{fontenc}
-\usepackage{fourier}
+\usepackage{lmodern}
 
 \usepackage[utf8]{inputenc}
 \usepackage[english, russian]{babel}  % Russian+english language/hyphenation
@@ -11,6 +11,7 @@
 \usepackage[pdftex]{graphicx}  % Enable pdflatex
 \usepackage{url}
 
+\usepackage{braket}
 
 %%% Custom sectioning (sectsty package)
 \usepackage{sectsty}  % Custom sectioning (see below)
@@ -36,3 +37,12 @@
 
 %%% Maketitle metadata
 \newcommand{\horrule}[1]{\rule{\linewidth}{#1}}   % Horizontal rule
+
+%%% Aliases
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} 
+% for partial derivatives
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}} 
+% for double partial derivatives
+\newcommand{\comm}[2]{\left[#1,#2\right]}
+
+\newcommand{\G}{\mathcal{G}}
