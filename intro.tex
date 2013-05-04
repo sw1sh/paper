@@ -10,7 +10,7 @@ with states and operators defined as
 \[ \ket{\psi_I} = e^{i H_0 t}\ket{\psi_S(t)} \]
 \[ O_I(t) = e^{i H_0 t} O_S e^{-i H_0 t} \] 
 
-The evolution of the wavefunction is thus
+The evolution of the wave function is thus
 
 \[ \ket{\psi_I(t)} = U(t) \ket{\psi_I(0)} \]
 
@@ -37,29 +37,60 @@ where
 
 \[ \left<A\right>_0 = \frac{Tr\left[e^{-\beta H_0}A\right]}{Z_0} \]
 
-Now we can write ratio of the interacting to the non-interacting partition function
+Now we can write the ratio of the interacting to the non-interacting partition function
 
-\[ \frac{Z}{Z_0} = \langle T\ exp\left[-\int_{0}^{\beta}V(\tau)d\tau\right]\rangle \]
+\[ S = \frac{Z}{Z_0} = \langle T\ exp\left[-\int_{0}^{\beta}V(\tau)d\tau\right]\rangle \]
 
 \subsection{Perturbation expansion}
-In most general form interaction is
-\[ V(t) = \tilde{z}(t)c+c^\dagger z(t) \] 
+Expanding the time-ordered exponential, gives us a perturbation series for the S-matrix
 
-where $z(t)$ and $\tilde{z}(t)$ are the anticommuting forces which ``create'' and ``annihilate'' particles respectively.
-
-Expanding the time-ordered exponential gives us a perturbation series
-
-\[ \frac{Z}{Z_0} = \sum_{n=0}^{\infty}\frac{(-1)^n}{n!}\int_{0}^{\beta}...\int_{0}^{\beta} d\tau_1...d\tau_n 
-    \langle T V(\tau_1)...V(\tau_n) \rangle \]
+\[ S = \frac{Z}{Z_0} = \sum_{n=0}^{\infty}\frac{(-1)^n}{n!}\int_{0}^{\beta}\dots\int_{0}^{\beta} d\tau_1\dots d\tau_n 
+    \langle T V(\tau_1)\dots V(\tau_n) \rangle \]
 
 Taking the logarithm of it yields
 
-\[ \log{\frac{Z}{Z_0}} = \sum_{n=1}^{\infty}\frac{(Z/Z_0-1)^n}{n} = \sum_{n=1}^{\infty}
-  \frac{\sum_{k=1}^{\infty}\frac{(-1)^k}{k!}\int_{0}^{\beta}...\int_{0}^{\beta} d\tau_1...d\tau_k 
-    \langle T V(\tau_1)...V(\tau_k) \rangle}{n} \]
+\[ \ln{S} = \sum_{n=1}^{\infty}\frac{(S-1)^n}{n} = \sum_{n=1}^{\infty}
+  \frac{(\sum_{k=1}^{\infty}\frac{(-1)^k}{k!}\int_{0}^{\beta}\dots\int_{0}^{\beta} d\tau_1\dots d\tau_k 
+    \langle T V(\tau_1)\dots V(\tau_k) \rangle)^n}{n} \]
 
 \subsection{Green functions}
-We define n-particle Green function as follows
+We define $n$-particle Green function as follows
 
-\[ \G(1..n;1'..n') = (-1)^n\langle T c(1)..c(n)c(1')..c(n')\rangle \]
+\[ \G(1\dots n;1'\dots n') = (-1)^n\langle T c(1)\dots c(n)c(1')\dots c(n')\rangle \]
+
+Adding auxiliary source terms to our interaction
+\[ V(t) \mapsto V(t) + \sum_n \tilde{\alpha}(n)c(n)+c^\dagger(n) \alpha(n) \] 
+
+where $\alpha(t)$ and $\tilde{\alpha}(t)$ are the anti-commuting forces which ``create'' and ``annihilate'' particles respectively.
+We then obtain $n$-particle Green functions as follows
+
+\[ \G(1\dots n;1'\dots n') = \left.\frac{1}{S}\frac{\partial^n S}{\partial\alpha(1)\partial\tilde{\alpha}(1')\dots \partial\alpha(n)\partial\tilde{\alpha}(n')}\right|_{\alpha,\tilde{\alpha}=0} \]
+
+And the $n$-th order coefficient of $\alpha$ and $\tilde{\alpha}$ in the expansion of S-matrix
+is known as the irreducible $n$-point Green function $\G_{irr}$ or the $n$-point vertex function $\Gamma$.
+
+\[ \Gamma(1\dots n;1'\dots n') = \left.\frac{\partial^n \ln{S}}{\partial\alpha(1)\partial\tilde{\alpha}(1')\dots \partial\alpha(n)\partial\tilde{\alpha}(n')}\right|_{\alpha,\tilde{\alpha}=0} \]
+
+\subsection{Matsubara Representation}
+Green functions satisfy the relation
+
+\[ \G(\tau+\beta) = \pm \G(\tau) \]
+
+so that bosonic (fermionic) Green functions are periodic (antiperiodic), with period $\beta$.
+
+The periodicity allow us to carry out a Fourier expansion of the Green functions in terms of discrete frequencies.
+Matsubara frequencies are defined as
+\begin{align*}
+  & \nu_n = 2\pi n k_B T \quad (Boson) \\ 
+  & \omega_n = \pi(2n+1)k_B T \quad (Fermion)
+\end{align*}
+
+Fourier expansion and its inverse then
+
+\begin{align*}
+  & \G(\tau) = T\sum_n \G(i\alpha_n)e^{-i\alpha_n\tau} \\
+  & \G(i\alpha_n) = \int_0^\beta d\tau \G(\tau) e^{i\alpha_n\tau} ,\quad \alpha_n = \nu_n, \omega_n
+\end{align*}
+
+\subsection{Feynman Diagrams}
 
