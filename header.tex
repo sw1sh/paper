@@ -1,6 +1,6 @@
 %%% Preamble
 \documentclass[paper=a4, fontsize=11pt]{scrartcl}  % Article class of KOMA-script with 11pt font and a4 format
-\usepackage[T1]{fontenc}
+\usepackage[T1,T2A]{fontenc}
 \usepackage{lmodern}
 
 \usepackage[utf8]{inputenc}
@@ -42,7 +42,7 @@
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} 
 % for partial derivatives
 \newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}} 
-\newcommand{\pdn}[3]{\frac{\partial^#1 #2}{\partial #3^#1}} 
+\newcommand{\pdn}[3]{\frac{\partial^#1 #2}{\partial #3^2}} 
 % for double partial derivatives
 \newcommand{\comm}[2]{\left[#1,#2\right]}
 

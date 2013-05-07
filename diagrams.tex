@@ -1,0 +1,62 @@
+\usepackage{tikz}
+\usetikzlibrary{decorations, decorations.markings, decorations.pathmorphing, arrows, graphs, graphdrawing, shapes.geometric, snakes, backgrounds,positioning,fit}
+\usegdlibrary{trees,force, layered}
+
+\pgfdeclaredecoration{complete sines}{initial}
+{
+    \state{initial}[
+        width=+0pt,
+        next state=sine,
+        persistent precomputation={\pgfmathsetmacro\matchinglength{
+            \pgfdecoratedinputsegmentlength / int(\pgfdecoratedinputsegmentlength/\pgfdecorationsegmentlength)}
+            \setlength{\pgfdecorationsegmentlength}{\matchinglength pt}
+        }] {}
+    \state{sine}[width=\pgfdecorationsegmentlength]{
+        \pgfpathsine{\pgfpoint{0.25\pgfdecorationsegmentlength}{0.5\pgfdecorationsegmentamplitude}}
+        \pgfpathcosine{\pgfpoint{0.25\pgfdecorationsegmentlength}{-0.5\pgfdecorationsegmentamplitude}}
+        \pgfpathsine{\pgfpoint{0.25\pgfdecorationsegmentlength}{-0.5\pgfdecorationsegmentamplitude}}
+        \pgfpathcosine{\pgfpoint{0.25\pgfdecorationsegmentlength}{0.5\pgfdecorationsegmentamplitude}}
+}
+    \state{final}{}
+}
+
+\tikzset{
+    photon/.style={
+        decoration={complete sines, amplitude=0.12cm, segment length=0.2cm},
+        decorate    
+    },
+    fermion/.style={
+        decoration={
+            markings,
+            mark=at position 0.5 with {\node[transform shape, xshift=-0.5mm, fill=black, inner sep=1pt, draw, isosceles triangle]{};}
+        },
+        postaction=decorate
+    },
+    gluon/.style={
+        decoration={coil, aspect=0.75, mirror, segment length=1.5mm},
+        decorate
+    }, 
+    left/.style={
+        bend left=90,
+        looseness=1.75
+    }
+}
+
+\usepackage{ifthen}
+\newcommand{\diagram}[1]{
+  \begin{tikzpicture}[baseline=(0)]
+  \ifthenelse{\equal{#1}{1}}{
+  \graph [spring layout, nodes={draw,circle,fill,scale=0.3}, horizontal'=0 to 3]
+  {
+    0 [coordinate] -- [left, fermion] 1 -- [left, draw] 0,
+    1 -- [photon] 2,
+    2 -- [left, draw] 3 [coordinate] -- [left, fermion] 2;
+  };
+  }{
+  \graph [spring layout, nodes={draw,circle,fill,scale=0.3}, horizontal'=0 to 1]
+  {
+    0 -- [photon] 1 -- [left, fermion] 0 -- [left, fermion] 1,
+  };
+  }
+  \end{tikzpicture}
+}
