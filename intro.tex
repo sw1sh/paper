@@ -23,6 +23,21 @@ using T-operator we obtain time-ordered exponential
 \[ U(t) = T\left[exp\left\{-i\int_{0}^{t}V(t')dt'\right\}\right] \]
 
 \subsection{Finite temperature}
+The essential step to finite temperature is possible due to the Japanese physicist Kubo, who noticed
+that the quantum-mechanical partition function can be regarded as a time-evolution operator in imaginary time.
+
+\[ \hat{\rho} \propto e^{-\beta \hat{H}} = U(-i\hbar\beta) \]
+
+Later, Matsubara wrote down the first imaginary time formulation of finite temperature many body physics.
+In the imaginary time approach, the partition function of a quantum system is simply the trace 
+of the time-evolution operator, evaluated at imaginary time $t = -i\hbar\beta$,
+
+\[ Z = Tr\ e^{-\beta H} = Tr\ U(-i\hbar\beta)\]
+
+whilst the expectation value of a quantity $A$ in thermal equilibrium is given by
+
+\[ <A> = \frac{Tr[U(-i\hbar\beta)A]}{Tr[U(-i\hbar\beta)]} \]
+
 Switching from $t$ to $i\tau$ with $\tau\in\{0,\beta=\frac{1}{k_B T}\}$ we obtain
 
 \[ U(\tau) = T\left[exp\left\{-\int_{0}^{\tau}V(\tau')d\tau'\right\}\right] \]
@@ -122,15 +137,34 @@ Fourier expansion and its inverse then
 \end{align*}
 
 \begin{align*}
-  & \ln{S} = \sum \{\text{Linked Cluster Diagrams}\} \\
+  \ln{S} = \sum \{\text{Linked Cluster Diagrams}\} \equiv
+  \left[
+    \diagram{1}
+    +
+    \diagram{2}
+    +
+    \dots
+  \right]
 \end{align*}
 
 \begin{align*}
-  & \G(1,2) = \sum \{\text{Two leg diagrams}\} \\
+  & \G(1,2) = \sum \{\text{Two leg diagrams}\} \equiv 
+  \begin{tikzpicture}[baseline={([yshift=-3pt]current bounding box)}]
+    \graph [spring layout, nodes={draw,circle,fill,scale=0.1}, vertical'=0 to 1]
+    {
+      1 -- [double distance=1pt, fermion] 0
+    };
+  \end{tikzpicture}
+  =
+  \left[
+    \diagram{3}
+    +
+    \diagram{4}
+    +
+    \diagram{5}
+    + \dots
+  \right]
 \end{align*}
-
-
-
 
 
 

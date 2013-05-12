@@ -1,11 +1,4 @@
-*.*~
-*.log
-*.aux
-*.nav
-*.toc
-*.snm
-*.out
-*.backup
-/*.png
-/paper.kilepr
-
+*.*
+!*.tex
+!*.bib
+!*.pdf
