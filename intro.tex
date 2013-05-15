@@ -1,6 +1,25 @@
 \section{Introduction}
-\subsection{Interaction representation}
+\subsection{Second quantization for fermions}
+The fermion creation and annihilation operators obey the following fundamental anticommutation relations
 
+\[ {a_\alpha,a_\beta^\dagger} = a_\alpha a_\beta^\dagger + a_\beta^\dagger a_\alpha = \delta_{\alpha,\beta} \]
+
+\[ {a_\alpha,a_\beta} = {a_\alpha^\dagger,a_\beta^\dagger} = 0 \]
+
+One-body and two-body operators in Fock space have the following form respectively
+
+\[ \hat{A} = \sum_{\alpha\beta}\bra{\alpha}A\ket{\beta}a_\alpha^\dagger a_\beta \]
+
+\[ \hat{B} = \frac{1}{2} \sum_{\alpha\beta\gamma\delta}\bra{\alpha\beta}B\ket{\alpha\beta} a_\alpha^\dagger a_\beta^\dagger a_\delta a_\gamma \]
+
+Using this Fock space formulation, the Hamiltonian of a many-particle system in second quantized form can be written as
+
+\[ \hat{H} = \hat{T}+\hat{V} = \sum_{\alpha\beta}\bra{\alpha}T\ket{\beta}a_\alpha^\dagger a_\beta 
+    + \frac{1}{2} \sum_{\alpha\beta\gamma\delta}\bra{\alpha\beta}V\ket{\alpha\beta} a_\alpha^\dagger a_\beta^\dagger a_\delta a_\gamma\]
+
+where $\hat{T}$ and $\hat{V}$ are the kinetic energy and two-body interaction operators.
+
+\subsection{Interaction representation}
 Given the Hamiltonian $H=H_0+V$ with $H_0$ and $V$ as noninteracting and interacting part respectively,
 evolution of states and operators are described by following equations
 \[ i\pd{}{t}\ket{\psi_I(t)}=V_I(t)\ket{\psi_I(t)} \]
@@ -108,8 +127,11 @@ Fourier expansion and its inverse then
 \end{align*}
 
 \subsection{Feynman Diagrams}
+Feynman Diagram techniques help to visualize the structure and apply physical interpretation
+to the otherwise incomprehensible formulas.
+
 \begin{align*}
-  Z = Z_0 & \sum \{\text{Disconnected Feynman diagrams}\} \equiv \\
+  S = & \sum \{\text{Disconnected Feynman diagrams}\} \equiv \\
   1 & + 
   \left[
     \diagram{1}
@@ -148,7 +170,7 @@ Fourier expansion and its inverse then
 \end{align*}
 
 \begin{align*}
-  & \G(1,2) = \sum \{\text{Two leg diagrams}\} \equiv 
+  & \G(1,1') = \sum \{\text{Two legged diagrams}\} \equiv 
   \begin{tikzpicture}[baseline={([yshift=-3pt]current bounding box)}]
     \graph [spring layout, nodes={draw,circle,fill,scale=0.1}, vertical'=0 to 1]
     {
@@ -166,6 +188,49 @@ Fourier expansion and its inverse then
   \right]
 \end{align*}
 
-
-
+\begin{align*}
+\G^{(4)}(1,2,1',2') = \sum \{\text{Four legged diagrams}\} \equiv 
+\left[
+\begin{tikzpicture}[on grid, baseline={([yshift=-3pt]current bounding box)}]
+  \tikzset{every node/.style={{draw,circle,fill,scale=0.2}}};
+  \node (0) at (0,0) {};
+  \node (1) at (2,0) {};
+  \node (2) at (0,1) {};
+  \node (3) at (2,1) {};
+  \tikzset{every node/.style={scale=1}};
+  \graph [use existing nodes, nodes={draw,circle,fill,scale=0.1}, horizontal'=0 to 1]
+  {
+    0 -- [fermion] 1,
+    2 -- [fermion] 3;
+  };
+\end{tikzpicture}
++
+\begin{tikzpicture}[on grid, baseline={([yshift=-3pt]current bounding box)}]
+  \tikzset{every node/.style={{draw,circle,fill,scale=0.2}}};
+  \node (0) at (0,0) {};
+  \node (1) at (2,0) {};
+  \node (2) at (0,1) {};
+  \node (3) at (2,1) {};
+  \node [coordinate] (c) at  (1,.5) {};
+  \node [coordinate] (l) at (.9,.45) {};
+  \node [coordinate] (r) at (1.1,.55) {};
+  \tikzset{every node/.style={scale=1}};
+  \graph [use existing nodes, nodes={draw,circle,fill,scale=0.1}, horizontal'=0 to 1]
+  {
+    0 -- [fermion] l -- [left,draw, looseness=1] r -- [draw] 3,
+    2 -- [fermion] c -- [draw] 1;
+  };
+\end{tikzpicture}
++
+\begin{tikzpicture}[baseline={([yshift=-3pt]current bounding box)}]
+  \graph [spring layout, nodes={draw,circle,fill,scale=0.1}, vertical'=1 to 4]
+  {
+    0 -- [fermion] 1 -- [fermion] 2,
+    1 -- [photon] 4,
+    3 -- [fermion] 4 -- [fermion] 5;
+  };
+\end{tikzpicture}
++\dots
+\right]
+\end{align*}
 
