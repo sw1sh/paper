@@ -17,31 +17,35 @@ The origin of superconductivity is still unclear, but it is commonly believed th
 \item
 Magnetic systems. Coulomb interaction between electrons may lead to a variety of spin ordering patterns, including ferromagnetism and antiferromagnetism.
 \item
-Quantum Hall systems. In the presense of a strong perpendicular magnetic field electrons confined in one or several two-dimensional layers form a new quantum liquid state,
+Quantum Hall systems. In the presence of a strong perpendicular magnetic field electrons confined in one or several two-dimensional layers form a new quantum liquid state,
  that may have some unusual properties.
 \item
 One dimensional electron systems. Electrons carry two important quantum numbers: charge and spin.
-When a single electron moves in a vacuum or in a conventional insulator we can observe charge and spin propogating together.
-By contrast in one dimensional systems interacting electrons disintegrate into charge and spin solitons that propogate at different velocities.
+When a single electron moves in a vacuum or in a conventional insulator we can observe charge and spin propagating together.
+By contrast in one dimensional systems interacting electrons disintegrate into charge and spin solitons that propagate at different velocities.
 \end{itemize}
 At this point we do not have a good general approach for understanding "strongly correlated systems".
 We only know certain aspects of several systems, and understand very poorly some other ones.
 
-\subsection{The Hubbard model}
-Having a lattice of atoms with electrons that are almost localized at each site with possibility to hop
+\subsection{The Hubbard model}\label{sec:hubbard}
+One of the models of a particular interest is the Hubbard model.
+The Hubbard model, named after John Hubbard, is the simplest model of interacting particles in a lattice,
+ with only two terms in the Hamiltonian: a kinetic term allowing for tunneling (``hopping'') of particles between sites of the lattice 
+ and a potential term consisting of an on-site interaction.
+So, having a lattice of atoms with electrons, that are almost localized at each site with possibility to hop
 only between nearest neighbors and approximation that electrons interact with each other only in a single orbit, 
-the Hubbard model can be thus be written
+the Hamiltonian for the Hubbard model can be thus be written as
 
-\[ H = -t \sum_{i,j,\sigma}(c_{i,\sigma}^\dagger c_{j,\sigma} + h.c.)+ U\sum_i n_{i\uparrow}n_{i\downarrow} - \mu\sum_{i,\sigma}c_{i\sigma}^\dagger c_{i\sigma} \]
+\begin{equation} H = -t \sum_{i,j,\sigma}(c_{i,\sigma}^\dagger c_{j,\sigma} + h.c.)+ U\sum_i n_{i\uparrow}n_{i\downarrow} - \mu\sum_{i,\sigma}c_{i\sigma}^\dagger c_{i\sigma} \end{equation}
 
 with the corresponding imaginary-time action
 
-\[ S = \int_0^\beta d\tau \left\{
-  -t \sum_{i,j,\sigma}c_{i,\sigma}^\dagger c_{j,\sigma} + U\sum_i n_{i\uparrow}n_{i\downarrow} - \sum_{i,\sigma}c_{i\sigma}^\dagger (\partial_\tau-\mu) c_{i\sigma} \right\} \]
+\begin{equation} S = \int_0^\beta d\tau \left\{
+  -t \sum_{i,j,\sigma}c_{i,\sigma}^\dagger c_{j,\sigma} + U\sum_i n_{i\uparrow}n_{i\downarrow} - \sum_{i,\sigma}c_{i\sigma}^\dagger (\partial_\tau-\mu) c_{i\sigma} \right\} \end{equation}
 
 and its Fourier transform
 
-\[ S[c,c^*] = \sum_{\omega k \sigma}(\epsilon_k-\mu-i\omega)c_{\omega k \sigma}^* c_{\omega k \sigma} + U\sum_i\int_0^\beta n_{i\uparrow\tau}n_{i\downarrow\tau} d\tau \]
+\begin{equation} S[c,c^*] = \sum_{\omega k \sigma}(\epsilon_k-\mu-i\omega)c_{\omega k \sigma}^* c_{\omega k \sigma} + U\sum_i\int_0^\beta n_{i\uparrow\tau}n_{i\downarrow\tau} d\tau \end{equation}
  
 \begin{tabular}{rl}
   here & $\epsilon_k = -2t(\cos{k_x}+\cos{k_y})$ - the bare dispersion law, \\
@@ -49,46 +53,78 @@ and its Fourier transform
   & $\omega$ - Matsubara frequencies.
 \end{tabular}
 
-\subsection{Dynamical mean-field theory}
-DMFT maps Hubbard model onto the so-called Anderson impurity model.
-This model describes the interaction of one site (the impurity) 
-with a ``bath'' of electronic levels through a hybridization function. 
+\subsection{Mean field theory}
+A many-body system with interactions is generally very difficult to solve exactly.
+The main idea of MFT is to replace all interactions to any one body with an average or effective interaction - the mean field.
+This reduces any many-body problem into an effective one-body problem.
+Mean field theory can be applied to a number of physical systems, for example Ising model.
 
-\[ H_{imp} = \underbrace{\sum_{\nu,\sigma}\epsilon_\nu n_{\nu,\sigma}^{bath}}_{H_{bath}} + 
+In mean-field theory, the mean field appearing in the single-site problem is a time-independent quantity.
+However, this isn't always the case: in a variant of mean-field theory called Dynamical Mean Field Theory (DMFT), the mean-field becomes a time-dependent quantity.
+DMFT maps a lattice problem onto a single-site problem. In DMFT, the local observable is the local Green's function.
+Thus, the self-consistency condition for DMFT is for the impurity Green's function to reproduce the lattice local Green's function through an effective mean-field.
+
+In our case DMFT maps Hubbard model onto the so-called Anderson impurity model.
+This model describes the interaction of one site (the impurity) with a ``bath'' of electronic levels through a hybridization function $\Delta(\tau)$.
+The corresponding Hamiltonian for the impurity is then
+
+\begin{equation} H_{imp} = \underbrace{\sum_{\nu,\sigma}\epsilon_\nu n_{\nu,\sigma}^{bath}}_{H_{bath}} + 
 	     \underbrace{\sum_{\nu,\sigma}\left(V_{\nu}c_{\sigma}^{\dagger}a_{\nu,\sigma}^{bath}+h.c.\right)}_{H_{mix}}+
 	     \underbrace{U n_{\uparrow} n_{\downarrow}-\mu \left(n_{\uparrow}+n_{\downarrow}\right)}_{H_{loc}}
-\]
+\end{equation}
 
 with the following action
 
-\[ S = \sum_{\omega \sigma}(\Delta_\omega-\mu-i\omega)c_{\omega\sigma}^* c_{\omega\sigma} + U\int_0^\beta n_{\uparrow\tau}n_{\downarrow\tau} d\tau \]
+\begin{equation} S = \sum_{\omega \sigma}(\Delta_\omega-\mu-i\omega)c_{\omega\sigma}^* c_{\omega\sigma} + U\int_0^\beta n_{\uparrow\tau}n_{\downarrow\tau} d\tau \end{equation}
 
 The hybridization function $\Delta_\omega$ plays the role of a $\it{dynamic}$ mean field.
 
+\subsection{Beyond DMFT}
+DMFT approach treats the local spin and orbital fluctuations of the correlated electrons in a correct self-consistent way,
+ while spatial correlations between sites are ignored.
+The non-perturbed DMFT is successful, because a number of the most important correlation effects are indeed related to local fluctuations.
+For example, DMFT describes correctly such phenomena, as the local moment formation in itinerant magnets, some aspects of Kondo physics
+ and the Mott insulator-to-metal transition on a lattice with a large connectivity in high-dimensional materials.
+
+On the other hand, there are a lot of examples where non-locality of spatial correlations also plays an important role.
+DMFT has several extensions, extending the above formalism to multi-orbital, multi-site problems.
+It can be extended with multiple orbitals, so that electron-electron interaction term would include terms denoting different orbitals.
+Cluster approximations takes into account the short-range non-local fluctuations in real or k-space.
+In these methods, correlations are assumed to be localized within a cluster including several lattice sites.
+
 \subsection{Dual fermion approach}
-The goal is to derive the properties of the initial lattice problem via the quantities
-of the impurity problem.
+The dual fermion extension \cite{0810.3819} of DMFT operates with a single-site impurity problem and treats spatial non-locality in a diagrammatic way.
+We start from the Hubbard model defined above (\autoref{sec:hubbard}).
+The goal is to derive the properties of the initial lattice problem via the quantities of the impurity problem.
 The lattice action can be represented in the following way
 
-\[ S[c,c^*] = \sum_i S_{imp}[c_i,c_i^*] - \sum_{\omega k \sigma}(\Delta_\omega-\epsilon_k)c_{\omega k\sigma}^* c_{\omega k\sigma} \]
+\begin{equation} S[c,c^*] = \sum_i S_{imp}[c_i,c_i^*] - \sum_{\omega k \sigma}(\Delta_\omega-\epsilon_k)c_{\omega k\sigma}^* c_{\omega k\sigma} \end{equation}
 
 Performing a dual transformation to a set of new Grassmann variables $f,f^*$
 
-\[ e^{A^2 c_\wks^*c_\wks} = \left(\frac{A}{\alpha}\right)^2 \int 
+\begin{equation} e^{A^2 c_\wks^*c_\wks} = \left(\frac{A}{\alpha}\right)^2 \int 
     e^{-\alpha(c_\wks^*f_\wks+f_\wks^*c_\wks)-\alpha^2 A^{-2}f_\wks^*f_\wks}df_\wks^*df_\wks
- \]
+ \end{equation}
 
 we can obtain an action depending on the new variables $f,f^*$ only
 
-\[ S[f,f^*] = -\sum_{\omega k} \ln{\alpha_{\omega\sigma}^{-2}(\Delta_\omega-\epsilon_k)} 
-    - \sum_i\ln{z_i^{imp}} + \sum_\wks \alpha_{\omega\sigma}((\Delta_\omega-\epsilon_k)^{-1}+g_\omega)
-    \alpha_{\omega\sigma}f_\wks^*f_\wks+\sum_i V_i \]
+\begin{equation}\begin{aligned}
+S[f,f^*] & = -\sum_{\omega k} \ln{\alpha_{\omega\sigma}^{-2}(\Delta_\omega-\epsilon_k)} - \sum_i\ln{z_i^{imp}} + \\ 
+	 & + \sum_\wks \alpha_{\omega\sigma}((\Delta_\omega-\epsilon_k)^{-1}+g_\omega) \alpha_{\omega\sigma}f_\wks^*f_\wks+\sum_i V_i 
+\end{aligned}\end{equation}
 
-where $z_i^{imp} = \int e^{-S_{imp}[c_i^*,c_i]}\D c_i^*\D c_i$, and the dual potential $V_i \equiv V[f_i^*,f_i]$
-is defined from the expression
+where $z_i^{imp} = \int e^{-S_{imp}[c_i^*,c_i]}\D c_i^*\D c_i$, and the dual potential $V_i \equiv V[f_i^*,f_i]$ is defined from the expression
 
-\[ \int e^{-S_{loc}[c_i^*,c_i,f_i^*,f_i]}\D c_i^*\D c_i = 
-  z_i^{imp}e^{\sum_{\omega\sigma}\alpha_{\omega\sigma}^2g_\omega f_{\omega i \sigma}^*f_{\omega i \sigma} - V[f_i^*,f_i]} \]
+\begin{equation} \int e^{-S_{loc}[c_i^*,c_i,f_i^*,f_i]}\D c_i^*\D c_i = 
+  z_i^{imp}e^{\sum_{\omega\sigma}\alpha_{\omega\sigma}^2g_\omega f_{\omega i \sigma}^*f_{\omega i \sigma} - V[f_i^*,f_i]} \end{equation}
 
-One can see that the $n$-th coefficient from the Taylor series of 
-$V[f_i^*,f_i]$ is proportional to $\gamma^{(n)}$, starting from $n=4$.
+One can see that the $2n$-th coefficient from the Taylor series of $V[f_i^*,f_i]$ is proportional to vertex function $\gamma^{(2n)}$.
+Next we establish an exact relation between the Green's function and higher-order momenta of initial and the dual system as Appendix A of \cite{0810.3819} describes.
+For example 
+
+\begin{equation}
+ G_{\omega,k} = (\Delta_\omega-\epsilon_k)^{-1}\alpha_{\omega\sigma}G_{\omega,k}^{dual}\alpha_{\omega\sigma}(\Delta_\omega-\epsilon_k)^{-1} + (\Delta_\omega-\epsilon_k)^{-1}
+\end{equation}
+
+The main idea of switching to the new variables is that, for a properly chosen $\Delta$, correlation properties of the $f^*,f$ system are simpler than for the 
+ $c^*,c$ original model. In other words, the magnitude of the nonlinear part in the dual action can be effectively decreased by the proper choice of $\Delta$.
