@@ -11,21 +11,21 @@ The annihilation operator in this space then can be constructed as follows
 \begin{equation} c_\sigma =  	(\ket{0}\bra{\uparrow}-\ket{\downarrow}\bra{\downarrow\uparrow})\delta_{\sigma,\uparrow}
 	+	(\ket{0}\bra{\downarrow}+\ket{\downarrow}\bra{\downarrow\uparrow})\delta_{\sigma,\downarrow} \end{equation}
 
+where $\delta_{\sigma_1,\sigma_2}$ - Kronecker's delta symbol.
+
 Since we using an interaction representation, the operator also evolves with time
 
 \begin{equation} c_{\sigma,\tau} = e^{H\tau}c_\sigma e^{-H\tau} \end{equation}
 
-We can now compute the quantum thermodynamic mean of any operator $A$ as follow
+We can now compute the quantum thermodynamic mean of any operator $A$ as follows
 
 \begin{equation} \langle A\rangle = \frac{1}{Z_0}Tr[e^{-H\beta}A] \end{equation}
 
 where $Z_0 = Tr[e^{-H\beta}] = 2(1+e^{-\frac{U\beta}{2}})$.
 
-Given this, it's now possible to compute $2n$-particle Green functions
+Given all the above definitions, it's now possible to compute $2n$-particle Green's functions and cumulants of the system
 
 \begin{equation} G(1\dots n;1'\dots n') = (-1)^n \langle c_1\dots c_n c_{1'}^\dagger\dots c_{n'}^\dagger\rangle\end{equation}
-
-Expressions for $\Gamma^{(2n)}$ are the $n$-th cumulants of the system
 
 \begin{equation} \Gamma^{(2)} = G(1, 1') \end{equation}
 
@@ -66,15 +66,80 @@ with $\Gamma_\omega^{(2n)}$ being an imaginary time Fourier transform of $\Gamma
 where the integration is performed as time $\tau_i$ increases $\tau_{2n}<\tau_{2n-1}<\dots<\tau_2<\tau_1<\beta$.
 
 \subsection{Calculations}
+Let's start with the easiest example and figure out expressions for $G(1,1')$ and its Fourier transform.
+Since $G(1,1')\neq0$ only when spins are parallel and depend only on time difference $\tau_1-\tau_{1'}$, we only have one case to consider
 
-We require energy conservation law of the form $\omega_1+\dots+\omega_{2n}=0$.
+\begin{equation}
+ G^{\uparrow\downarrow} = G^{\downarrow\uparrow} = 0
+\end{equation}
 
-\begin{equation} G(\omega) = -\frac{i\omega}{\frac{U}{2}^2+\omega^2},\quad \omega_1=-\omega_2=\omega \end{equation}
+\begin{align*}
+ \label{Gamma2}
+ \stepcounter{equation}
+ G^{\downarrow\downarrow}(\tau_1-\tau_{1'}=\tau) & = G^{\uparrow\uparrow}(\tau) = (-1)^1\left\langle e^{H\tau} c_\uparrow e^{-H\tau} c_\uparrow^\dagger\right\rangle \\
+  & = 
+  -\frac{1}{Z}\left[
+    \bra{0}e^{-H\beta}e^{H\tau}c_\uparrow e^{-H\tau} c_\uparrow^\dagger\ket{0} +
+    \bra{\downarrow}e^{-H\beta}e^{H\tau}c_\uparrow e^{-H\tau} c_\uparrow^\dagger\ket{\downarrow}
+  \right] \tag{\theequation} \\
+  & = -\frac{1}{2(1+e^{-\frac{U\beta}{2}})}\left[ 
+    \bra{0}e^{-\frac{U}{2}\beta}e^{\frac{U}{2}\tau}e^{-0\times\tau}\ket{0} +
+    \bra{\downarrow}e^{-0\times\beta}e^{0\times\tau}(-1)e^{-\frac{U}{2}\tau}(-1)\ket{\downarrow}
+  \right] \\
+  & = -\frac{1}{2(1+e^{-\frac{U\beta}{2}})}\left[
+    e^{-\frac{U}{2}\beta+\frac{U}{2}\tau} + e^{-\frac{U}{2}\tau}
+  \right] = \frac{1}{2\cosh{\frac{U\beta}{4}}}\cosh{(\frac{U}{2}(\frac{\beta}{2}+\tau))}
+\end{align*}
 
+The Fourier transform to a Matsubara space \autoref{sec:matsubara} follows
+\begin{equation}\begin{aligned}
+ G(\omega) & = \int_0^\beta G(\tau) e^{i\omega\tau} d\tau
+  = -\frac{1}{2(1+e^{-\frac{U\beta}{2}})}\left[ 
+    e^{-\frac{U}{2}\beta}\int_0^\beta  e^{(i\omega+\frac{U}{2})\tau} d\tau + \int_0^\beta  e^{(i\omega-\frac{U}{2})\tau} d\tau
+  \right] \\
+ & = -\frac{1}{2(1+e^{-\frac{U\beta}{2}})}\left[
+    e^{-\frac{U}{2}\beta} \frac{e^{(i\omega+\frac{U}{2})\beta}-1}{i\omega+\frac{U}{2}} + \frac{e^{(i\omega-\frac{U}{2})\beta}-1}{i\omega-\frac{U}{2}}
+  \right]
+\end{aligned}\end{equation}
+
+We can now use the fact that $\omega = \frac{\pi}{\beta}(2n+1)$,
+ so that making a substitution of this definition into exponents of the form $e^{i\omega\beta}$ simplifies them to just $-1$
+\begin{equation}\begin{aligned}
+ G(\omega) & = -\frac{1}{2(1+e^{-\frac{U\beta}{2}})}\left[
+    e^{-\frac{U}{2}\beta} \frac{-e^{\frac{U}{2}\beta}-1}{i\omega+\frac{U}{2}} + \frac{-e^{-\frac{U}{2}\beta}-1}{i\omega-\frac{U}{2}}
+  \right] \\
+  & = - \frac{1}{2\bcancel{(1+e^{-\frac{U\beta}{2}})}}\left[
+    \frac{(i\omega-\cancel{\frac{U}{2}})\bcancel{(1+e^{-\frac{U}{2}\beta})}+(i\omega+\cancel{\frac{U}{2}})\bcancel{(e^{-\frac{U}{2}\beta}+1)}}{\omega^2+\frac{U}{2}^2}
+  \right] = -\frac{i\omega}{\omega^2+\frac{U}{2}^2}
+\end{aligned}\end{equation}
+ 
+We can also write the full answer in the following form
+\begin{equation}
+ G^{\sigma_1,\sigma_2}(\omega_1,\omega_2) = -\frac{i\omega_1}{\omega_1^2+\frac{U}{2}^2}\delta_{\sigma_1,-\sigma_2}\delta_{\omega_1,-\omega_2}
+\end{equation}
+
+Even though we have the explicit formulas for exact momenta derivation, it would be quite tedious to perform such derivation by hand of course.
+For example, in order to calculate $G^{(4)}$ we need to permute $3!=6$ times three independent time variables and then perform
+ triple integration on the result to get $G_\omega^{(4)}$.
+For this purpose we bring heavy artillery to our aid of the form of the best known symbolical computation tools - Wolfram Mathematica.
+The code that does this, consists of the following basic parts:
+\begin{itemize}
+ \item To represent operators it's either possible to deal directly with matrices or take advantage of \href{http://homepage.cem.itesm.mx/lgomez/quantum/}{Quantum}
+package that provides convenient Bra-Ket notation and Quantum Algebra, which makes the code more concise. Therefore the latter was chosen.
+ \item Assigning time-ordering attribute to imaginary time variables ($\tau_i$) and the definition of time-ordering operator T that sorts provided operators accordingly,
+with appropriate fermionic permutation sign in front.
+ \item To speed up the integration part, we define our own simplified version of integral function that can only deal with polynomials, exponentials and their product.
+Also it allows us to carry out Kronecker's delta symbols every time an exponential is integrated.
+In other words $\int e^{P(\omega)\tau}d\tau$ isn't just $\frac{e^{P(\omega)\tau}}{P(\omega)}$
+ but $\frac{e^{P(\omega)\tau}}{P(\omega)}+(\tau-\frac{e^{P(\omega)\tau}}{P(\omega)})\delta_{P(\omega)}$.
+Where $P(\omega)$ is some linear function of $\omega_1\dots\omega_{2n}$ that together with energy conservation law $\omega_1+\dots+\omega_{2n}=0$ 
+ gives us a way to get the final result in just one run without substituting different frequency combinations each time or taking various limits in the end.
+\end{itemize}
+
+First we repeat the result of the Appendix B in \cite{0809.1051} and compute $\gamma^{(4)}$. The following final formulas thus obtained
 \begin{equation} \gamma^{\uparrow\uparrow\uparrow\uparrow} = \beta \frac{U^2}{4}\frac{\delta_{\omega_1,-\omega_3}-\delta_{\omega_2,-\omega_3}}{\omega_1^2\omega_2^2}
   (\omega_1^2+\frac{U^2}{4})(\omega_2^2+\frac{U^2}{4}) 
 \end{equation}
-
 
 \begin{equation}\begin{aligned}
  \gamma^{\downarrow\uparrow\downarrow\uparrow} & = 
@@ -83,4 +148,39 @@ We require energy conservation law of the form $\omega_1+\dots+\omega_{2n}=0$.
   &- \beta\frac{U^2}{4}\frac{1}{1+e^{\frac{U\beta}{2}}}\frac{2\delta_{\omega_1,-\omega_2}+\delta_{\omega_2,-\omega_3}}{\omega_1^2\omega_3^2}(\omega_1^2+\frac{U^2}{4})(\omega_3^2+\frac{U^2}{4}) \\
   &+ \beta\frac{U^2}{4}\frac{1}{1+e^{-\frac{U\beta}{2}}}\frac{2\delta_{\omega_1,-\omega_3}+\delta_{\omega_2,-\omega_3}}{\omega_1^2\omega_2^2}(\omega_1^2+\frac{U^2}{4})(\omega_2^2+\frac{U^2}{4})   
 \end{aligned}\end{equation}
+
+Next we conclude the absence of the $\Gamma^{(6)}$ with all parallel spins
+\begin{equation}
+ \Gamma^{\multido{}{6}{\uparrow}} = \Gamma^{\multido{}{6}{\downarrow}} = 0
+\end{equation}
+
+Then after some simplifications we can obtain the following expression
+\footnote{Compare to \eqref{Gamma2} and
+\[
+ \Gamma^{\multido{}{4}{\uparrow}} = -\frac{3}{2\cosh^2{\frac{U\beta}{4}}}\cosh{(\frac{U}{4}(\beta-2\tau_3))}\sinh{(\frac{U}{2}(\tau_1-\tau_2))}
+\]
+}
+\begin{equation}
+\label{Gamma6}
+ \Gamma^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow} = 
+    2\frac{7\cosh{(\frac{U\beta}{2})-8}}{\cosh^3{\frac{U\beta}{4}}}\cosh{(\frac{U}{2}(\frac{\beta}{2}-\tau_5))}
+      \sinh{(\frac{U}{2}(\tau_2-\tau_3))}\sinh{(\frac{U}{2}(\tau_1-\tau_4))}
+\end{equation}
+
+It depends only on three time differences, let's redefine them as $\tau_1-\tau_4\rightarrow\tau_1,\tau_2-\tau_3\rightarrow \tau_2,\tau_5\rightarrow\tau_3$.
+Therefore we can conclude, that Fourier transform of \eqref{Gamma6} will not vanish only if frequencies are pairwise equal to each other.
+The exact formula is quite huge and occupies ~5 pages\footnote{Full expression can be found here: \url{http://github.com/sw1sh/gamma6.pdf}},
+ but since we interested only in magnitude order of $U$, lets just settle only for the first Taylor coefficient in front of $U^2$ here
+
+\begin{align*}
+ \stepcounter{equation}
+ \gamma^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow} & =
+  \frac{U^2(\omega_1^2+\frac{U^2}{4})(\omega_2^2+\frac{U^2}{4})(\omega_3^2+\frac{U^2}{4})}{12\omega_1^5\omega_2^2\omega_3^5}\times( \\
+   &\quad6\beta\omega_3^5(\beta\omega_3-i)+6\omega_2^2\omega_3^2(16-7\beta^2\omega_3^2+8i\beta\omega_3+i\beta^3\omega_3^3)+ \tag{\theequation} \\
+   &\quad2\omega_2^4(12-3\beta^2\omega_3^2+6i\beta\omega_3+i\beta^3\omega_3^3)+\omega_2\omega_3^3(24-27\beta^2\omega_3^2+24i\beta\omega_3+2i\beta^3\omega_3^3)+ \\
+   &\quad3\omega_2^3\omega_3(28-9\beta^2\omega_3^2+14i\beta\omega_3+2i\beta^3\omega_3^3)\\
+   & ) + O(U^2)
+\end{align*}
+
+Other spin configurations yield the same result, maybe just with the sign difference.
 
