@@ -91,3 +91,36 @@
   }}}}
   \end{tikzpicture}
 }
+
+\newcommand{\diagramfour}[0]{
+\begin{tikzpicture}[on grid, baseline={([yshift=-3pt]current bounding box)}]
+  \tikzset{every node/.style={{draw,circle,fill,scale=0.2}}};
+  \node (0) at (0,0) {};
+  \node (1) at (2,0) {};
+  \node (2) at (0,1) {};
+  \node (3) at (2,1) {};
+  \tikzset{every node/.style={scale=1}};
+  \graph [use existing nodes, nodes={draw,circle,fill,scale=0.1}, horizontal'=0 to 1]
+  {
+    0 -- [double distance=1pt, fermion] 1,
+    2 -- [double distance=1pt, fermion] 3;
+  };
+\end{tikzpicture}
++
+\begin{tikzpicture}[on grid, baseline={([yshift=-3pt]current bounding box)}]
+  \tikzset{every node/.style={{draw,circle,fill,scale=0.2}}};
+  \node (0) at (0,0) {};
+  \node (1) at (2,0) {};
+  \node (2) at (0,1) {};
+  \node (3) at (2,1) {};
+  \node [coordinate] (c) at  (1,.5) {};
+  \node [coordinate] (l) at (.9,.45) {};
+  \node [coordinate] (r) at (1.1,.55) {};
+  \tikzset{every node/.style={scale=1}};
+  \graph [use existing nodes, nodes={draw,circle,fill,scale=0.1}, horizontal'=0 to 1]
+  {
+    0 -- [double distance=1pt, fermion] l -- [double distance=1pt, left,draw, looseness=1] r -- [double distance=1pt, draw] 3,
+    2 -- [double distance=1pt, fermion] c -- [double distance=1pt, draw] 1;
+  };
+\end{tikzpicture}
+}

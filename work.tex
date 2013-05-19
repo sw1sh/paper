@@ -6,14 +6,14 @@ Following the dual fermion approach we now consider only the local Hamiltonian o
 
 with impurity states $\ket{0},\ket{\downarrow},\ket{\uparrow},\ket{\downarrow\uparrow}$ and eigenenergies $\frac{U}{2},0,0,\frac{U}{2}$ respectively.
 
-The annihilation operator in this space then can be constructed as follows
+The annihilation operator in this basis then can be constructed as follows
 
 \begin{equation} c_\sigma =  	(\ket{0}\bra{\uparrow}-\ket{\downarrow}\bra{\downarrow\uparrow})\delta_{\sigma,\uparrow}
 	+	(\ket{0}\bra{\downarrow}+\ket{\downarrow}\bra{\downarrow\uparrow})\delta_{\sigma,\downarrow} \end{equation}
 
 where $\delta_{\sigma_1,\sigma_2}$ - Kronecker's delta symbol.
 
-Since we using an interaction representation, the operator also evolves with time
+Since we using an interaction representation, the operators also evolve with time
 
 \begin{equation} c_{\sigma,\tau} = e^{H\tau}c_\sigma e^{-H\tau} \end{equation}
 
@@ -23,7 +23,7 @@ We can now compute the quantum thermodynamic mean of any operator $A$ as follows
 
 where $Z_0 = Tr[e^{-H\beta}] = 2(1+e^{-\frac{U\beta}{2}})$.
 
-Given all the above definitions, it's now possible to compute $2n$-particle Green's functions and cumulants of the system
+Given all the above definitions, it's now possible to compute $2n$-particle Green's functions and vertices of the system
 
 \begin{equation} G(1\dots n;1'\dots n') = (-1)^n \langle c_1\dots c_n c_{1'}^\dagger\dots c_{n'}^\dagger\rangle\end{equation}
 
@@ -50,24 +50,24 @@ Given all the above definitions, it's now possible to compute $2n$-particle Gree
 -G(3, 3') G(1, 2, 1', 2')
 \end{aligned}\end{equation}
 
-where variables $1,2\dots n;1',2'\dots n'$ are the shortcuts for corresponding spin and time $(\sigma_i,\tau_i)$
- and also summation over time ordering ($(2n)!$ permutations $\beta>\tau_{i_1}>\tau_{i_2}>\dots\ >\tau_{i_{2n}}$) is implied.
+where we use $1,2\dots n;1',2'\dots n'$ as the shortcuts for the corresponding spin and time variables $(\sigma_i,\tau_i)$.
 
-The vertex functions $\gamma^{(2n)}$ are defined as follows
-
-\begin{equation} \gamma^{(2n)} = \frac{\Gamma_\omega^{(2n)}}{G(\omega_1)\dots G(\omega_{2n})} \end{equation}
-
-with $\Gamma_\omega^{(2n)}$ being an imaginary time Fourier transform of $\Gamma^{(2n)}$ ($\Gamma^{(2n)}$ in Matsubara space)
-
+Fourier transform in Matsubara representation should take into account time ordering
 \begin{equation}
-  \Gamma_\omega^{(2n)}(\omega_1,\dots,\omega_{2n}) = \int_0^\beta\int_0^{\tau_1}\dots\int_0^{\tau_{2n-1}}\Gamma^{(2n)}(\tau_1,\dots,\tau_{2n})e^{i(\omega_1\tau_1+\dots+\omega_{2n}\tau_{2n})}d\tau_{2n}\dots d\tau_1
+  \Gamma_\omega^{(2n)} = \sum_{P_i} \int_0^\beta\int_0^{\tau_{i_1}}\dots\int_0^{\tau_{i_{2n-1}}}\Gamma^{(2n)}(\tau_{i_1},\dots,\tau_{i_{2n}})
+  e^{i(\omega_{i_1}\tau_{i_1}+\dots+\omega_{i_{2n}}\tau_{i_{2n}})}d\tau_{i_{2n}}\dots d\tau_{i_1}
 \end{equation}
 
-where the integration is performed as time $\tau_i$ increases $\tau_{2n}<\tau_{2n-1}<\dots<\tau_2<\tau_1<\beta$.
+where $P_i$ are the permutations over time ordering $\tau_{i_1}>\tau_{i_2}>\dots\ >\tau_{i_{2n}}$,
+ so that integration is performed as time $\tau_i$ increases $\tau_{i_{2n}}<\tau_{2n-1}<\dots<\tau_2<\tau_1<\beta$.
+
+The $\gamma^{(2n)}$-functions used in diagrammatic technique of dual-fermion approach are defined as normalized vertex functions in Matsubara space
+\begin{equation} \gamma^{(2n)} = \frac{\Gamma_\omega^{(2n)}}{G(\omega_1)\dots G(\omega_{2n})} \end{equation}
+where $G(\omega_i)$ will be derived later.
 
 \subsection{Calculations}
-Let's start with the easiest example and figure out expressions for $G(1,1')$ and its Fourier transform.
-Since $G(1,1')\neq0$ only when spins are parallel and depend only on time difference $\tau_1-\tau_{1'}$, we only have one case to consider
+Let's start with the detailed derivation of $G(1,1')$ and its Fourier transform.
+Since $G(1,1')\neq0$ only when spins are parallel and depends only on time difference $\tau_1-\tau_{1'}$, we only left with one case to consider
 
 \begin{equation}
  G^{\uparrow\downarrow} = G^{\downarrow\uparrow} = 0
@@ -91,7 +91,7 @@ Since $G(1,1')\neq0$ only when spins are parallel and depend only on time differ
   \right] = \frac{1}{2\cosh{\frac{U\beta}{4}}}\cosh{(\frac{U}{2}(\frac{\beta}{2}+\tau))}
 \end{align*}
 
-The Fourier transform to a Matsubara space \autoref{sec:matsubara} follows
+Next follows a Fourier transform of $G(\tau)$ into Matsubara representation (\autoref{sec:matsubara}) 
 \begin{equation}\begin{aligned}
  G(\omega) & = \int_0^\beta G(\tau) e^{i\omega\tau} d\tau
   = -\frac{1}{2(1+e^{-\frac{U\beta}{2}})}\left[ 
@@ -103,7 +103,7 @@ The Fourier transform to a Matsubara space \autoref{sec:matsubara} follows
 \end{aligned}\end{equation}
 
 We can now use the fact that $\omega = \frac{\pi}{\beta}(2n+1)$,
- so that making a substitution of this definition into exponents of the form $e^{i\omega\beta}$ simplifies them to just $-1$
+ so that substitution of this definition into exponents, simplifies $e^{i\omega\beta}$ to just $-1$
 \begin{equation}\begin{aligned}
  G(\omega) & = -\frac{1}{2(1+e^{-\frac{U\beta}{2}})}\left[
     e^{-\frac{U}{2}\beta} \frac{-e^{\frac{U}{2}\beta}-1}{i\omega+\frac{U}{2}} + \frac{-e^{-\frac{U}{2}\beta}-1}{i\omega-\frac{U}{2}}
@@ -113,14 +113,14 @@ We can now use the fact that $\omega = \frac{\pi}{\beta}(2n+1)$,
   \right] = -\frac{i\omega}{\omega^2+\frac{U}{2}^2}
 \end{aligned}\end{equation}
  
-We can also write the full answer in the following form
+We can also write full answer as
 \begin{equation}
- G^{\sigma_1,\sigma_2}(\omega_1,\omega_2) = -\frac{i\omega_1}{\omega_1^2+\frac{U}{2}^2}\delta_{\sigma_1,-\sigma_2}\delta_{\omega_1,-\omega_2}
+ G^{\sigma_1\sigma_2}(\omega_1,\omega_2) = -\frac{i\omega_1}{\omega_1^2+\frac{U}{2}^2}\delta_{\sigma_1,-\sigma_2}\delta_{\omega_1,-\omega_2}
 \end{equation}
 
 Even though we have the explicit formulas for exact momenta derivation, it would be quite tedious to perform such derivation by hand of course.
-For example, in order to calculate $G^{(4)}$ we need to permute $3!=6$ times three independent time variables and then perform
- triple integration on the result to get $G_\omega^{(4)}$.
+For example, in order to calculate $\gamma^{(4)}$ we need to permute three independent time variables  $3!=6$ times, and each time perform triple integration.
+And for $\gamma^{(6)}$ it's $5!=120$ permutations and five integrations.
 For this purpose we bring heavy artillery to our aid of the form of the best known symbolical computation tools - Wolfram Mathematica.
 The code that does this, consists of the following basic parts:
 \begin{itemize}
@@ -149,38 +149,70 @@ First we repeat the result of the Appendix B in \cite{0809.1051} and compute $\g
   &+ \beta\frac{U^2}{4}\frac{1}{1+e^{-\frac{U\beta}{2}}}\frac{2\delta_{\omega_1,-\omega_3}+\delta_{\omega_2,-\omega_3}}{\omega_1^2\omega_2^2}(\omega_1^2+\frac{U^2}{4})(\omega_2^2+\frac{U^2}{4})   
 \end{aligned}\end{equation}
 
-Next we conclude the absence of the $\Gamma^{(6)}$ with all parallel spins
+Note the similarities between vertices of 2nd and 3rd order 
+\begin{equation}
+ \Gamma_{\tau_1>\tau_2>\tau_3}^{\multido{}{4}{\uparrow}} = -\frac{1}{4\cosh^2{\frac{U\beta}{4}}}\sinh{(\frac{U}{2}(\tau_1-\tau_2))}\sinh{(\frac{U}{2}\tau_3)}
+\end{equation}
+
+\begin{equation}
+\label{Gamma6}
+ \Gamma_{\tau_1>\tau_2>\tau_3>\tau_4>\tau_5}^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow} = 
+    -\frac{1}{4\cosh^3{\frac{U\beta}{4}}}\cosh{(\frac{U}{8}(\frac{\beta}{2}-(\tau_1-\tau_4)))}
+      \sinh{(\frac{U}{2}(\tau_2-\tau_3))}\sinh{(\frac{U}{2}\tau_5)}
+\end{equation}
+Similar expressions can easily be computed for the higher-order vertex functions with any spin configurations.
+
+Then we conclude by computation that the $\Gamma^{(6)}$ vanishes when all spins are parallel
 \begin{equation}
  \Gamma^{\multido{}{6}{\uparrow}} = \Gamma^{\multido{}{6}{\downarrow}} = 0
 \end{equation}
 
-Then after some simplifications we can obtain the following expression
-\footnote{Compare to \eqref{Gamma2} and
-\[
- \Gamma^{\multido{}{4}{\uparrow}} = -\frac{3}{2\cosh^2{\frac{U\beta}{4}}}\cosh{(\frac{U}{4}(\beta-2\tau_3))}\sinh{(\frac{U}{2}(\tau_1-\tau_2))}
-\]
-}
-\begin{equation}
-\label{Gamma6}
- \Gamma^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow} = 
-    2\frac{7\cosh{(\frac{U\beta}{2})-8}}{\cosh^3{\frac{U\beta}{4}}}\cosh{(\frac{U}{2}(\frac{\beta}{2}-\tau_5))}
-      \sinh{(\frac{U}{2}(\tau_2-\tau_3))}\sinh{(\frac{U}{2}(\tau_1-\tau_4))}
-\end{equation}
+Even it is possible to compute $\gamma^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow}$,
+ the result is quite huge, and it's impossible to represent it in any human readable form, even the first not vanishing term of Taylor expansion by $U$ is very big.
+However we still can get some results by considering only the case $\tau_1>\tau_2>\dots\ >\tau_{2n}$ and only pairwise equal frequencies.
+Also by taking into account only first two Taylor coefficient by $U$, we conclude that
+ $\gamma^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow}(\omega_1=-\omega_2,\omega_3=-\omega_4,\omega_5=-\omega_6) = O(U^2)$,
+ i.e. has no terms up to the 4th order at least (because it should consist of only even terms), but
+ $\gamma^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow}(\omega_1=-\omega_4,\omega_2=-\omega_3,\omega_5=-\omega_6)$ has the 2nd order term and it's equal to
 
-It depends only on three time differences, let's redefine them as $\tau_1-\tau_4\rightarrow\tau_1,\tau_2-\tau_3\rightarrow \tau_2,\tau_5\rightarrow\tau_3$.
-Therefore we can conclude, that Fourier transform of \eqref{Gamma6} will not vanish only if frequencies are pairwise equal to each other.
-The exact formula is quite huge and occupies ~5 pages\footnote{Full expression can be found here: \url{http://github.com/sw1sh/gamma6.pdf}},
- but since we interested only in magnitude order of $U$, lets just settle only for the first Taylor coefficient in front of $U^2$ here
+\begin{dmath}
+    -\frac{U^2 \left(U^2+4 \omega _3^2\right){}^2 \left(U^2+4 \omega _4^2\right){}^2 \left(U^2+4 \omega _5^2\right){}^2 }{524288 \omega _3^6 \left(\omega _3-\omega _4\right){}^2 \omega _4^6 \omega _5^5 \left(\omega _4+\omega _5\right){}^2 \left(-\omega
+   _3+\omega _4+\omega _5\right){}^3}
+   \left(-\left(\beta
+   ^2 \omega _5 \left(\beta  \omega _5+2 i\right) \omega _4^5+2 \left(\beta ^3 \omega _5^3+2 \beta  \omega _5+16 i\right) \omega
+   _4^4+\omega _5 \left(\beta ^3 \omega _5^3-6 i \beta ^2 \omega _5^2-16 \beta  \omega _5+24 i\right) \omega _4^3-4 i \omega _5^2
+   \left(\beta ^2 \omega _5^2-3 i \beta  \omega _5+6\right) \omega _4^2-8 \omega _5^3 \left(\beta  \omega _5-i\right) \omega _4+24
+   i \omega _5^4\right) \omega _3^7+\left(5 \beta ^2 \omega _5 \left(\beta  \omega _5+2 i\right) \omega _4^6+\left(13 \beta ^3
+   \omega _5^3+10 i \beta ^2 \omega _5^2+12 \beta  \omega _5+96 i\right) \omega _4^5+\omega _5 \left(11 \beta ^3 \omega _5^3-22 i
+   \beta ^2 \omega _5^2-60 \beta  \omega _5+136 i\right) \omega _4^4+\omega _5^2 \left(3 \beta ^3 \omega _5^3-34 i \beta ^2 \omega
+   _5^2-84 \beta  \omega _5-48 i\right) \omega _4^3-4 i \omega _5^3 \left(3 \beta ^2 \omega _5^2-17 i \beta  \omega _5+12\right)
+   \omega _4^2+8 \omega _5^4 \left(14 i-3 \beta  \omega _5\right) \omega _4+72 i \omega _5^5\right) \omega _3^6-\left(10 \beta ^2
+   \omega _5 \left(\beta  \omega _5+2 i\right) \omega _4^7+\left(32 \beta ^3 \omega _5^3+42 i \beta ^2 \omega _5^2+4 \beta  \omega
+   _5+96 i\right) \omega _4^6+\omega _5 \left(37 \beta ^3 \omega _5^3-6 i \beta ^2 \omega _5^2-88 \beta  \omega _5+200 i\right)
+   \omega _4^5+2 \omega _5^2 \left(9 \beta ^3 \omega _5^3-35 i \beta ^2 \omega _5^2-76 \beta  \omega _5-12 i\right) \omega
+   _4^4+\omega _5^3 \left(3 \beta ^3 \omega _5^3-54 i \beta ^2 \omega _5^2-160 \beta  \omega _5-192 i\right) \omega _4^3-4 i
+   \omega _5^4 \left(3 \beta ^2 \omega _5^2-27 i \beta  \omega _5-20\right) \omega _4^2-24 \omega _5^5 \left(\beta  \omega _5-9
+   i\right) \omega _4+72 i \omega _5^6\right) \omega _3^5+\left(\omega _4+\omega _5\right) \left(10 \beta ^2 \omega _5 \left(\beta
+    \omega _5+2 i\right) \omega _4^7+4 \left(7 \beta ^3 \omega _5^3+12 i \beta ^2 \omega _5^2-6 \beta  \omega _5+8 i\right) \omega
+   _4^6+\omega _5 \left(27 \beta ^3 \omega _5^3+16 i \beta ^2 \omega _5^2-88 \beta  \omega _5+24 i\right) \omega _4^5+2 \omega
+   _5^2 \left(5 \beta ^3 \omega _5^3-17 i \beta ^2 \omega _5^2-18 \beta  \omega _5-44 i\right) \omega _4^4+\omega _5^3 \left(\beta
+   ^3 \omega _5^3-26 i \beta ^2 \omega _5^2-48 \beta  \omega _5-144 i\right) \omega _4^3-4 i \omega _5^4 \left(\beta ^2 \omega
+   _5^2-13 i \beta  \omega _5-4\right) \omega _4^2-8 \omega _5^5 \left(\beta  \omega _5-13 i\right) \omega _4+24 i \omega
+   _5^6\right) \omega _3^4-\omega _4 \omega _5 \left(\omega _4+\omega _5\right){}^2 \left(5 \beta ^2 \left(\beta  \omega _5+2
+   i\right) \omega _4^6+4 \beta  \left(3 \beta ^2 \omega _5^2+8 i \beta  \omega _5-9\right) \omega _4^5+\left(9 \beta ^3 \omega
+   _5^3+24 i \beta ^2 \omega _5^2-92 \beta  \omega _5-120 i\right) \omega _4^4+2 \omega _5 \left(\beta ^3 \omega _5^3-i \beta ^2
+   \omega _5^2-2 \beta  \omega _5-28 i\right) \omega _4^3+4 \beta  \omega _5^3 \left(4-i \beta  \omega _5\right) \omega _4^2-8
+   \omega _5^3 \left(\beta  \omega _5+4 i\right) \omega _4+16 i \omega _5^4\right) \omega _3^3+\omega _4^2 \omega _5 \left(\omega
+   _4+\omega _5\right){}^2 \left(\beta ^2 \left(\beta  \omega _5+2 i\right) \omega _4^6+\beta  \left(3 \beta ^2 \omega _5^2+14 i
+   \beta  \omega _5-20\right) \omega _4^5+\left(3 \beta ^3 \omega _5^3+24 i \beta ^2 \omega _5^2-112 \beta  \omega _5-168 i\right)
+   \omega _4^4+\omega _5 \left(\beta ^3 \omega _5^3+14 i \beta ^2 \omega _5^2-120 \beta  \omega _5-160 i\right) \omega _4^3+2 i
+   \omega _5^2 \left(\beta ^2 \omega _5^2+10 i \beta  \omega _5+60\right) \omega _4^2+8 \omega _5^3 \left(\beta  \omega _5+4
+   i\right) \omega _4-16 i \omega _5^4\right) \omega _3^2-2 i \omega _4^3 \omega _5 \left(\omega _4+\omega _5\right){}^3
+   \left(\beta  \left(\beta  \omega _5+2 i\right) \omega _4^4+2 \left(\beta ^2 \omega _5^2+14 i \beta  \omega _5-26\right) \omega
+   _4^3+\omega _5 \left(\beta ^2 \omega _5^2+32 i \beta  \omega _5-24\right) \omega _4^2+2 \omega _5^2 \left(3 i \beta  \omega
+   _5+26\right) \omega _4+8 \omega _5^3\right) \omega _3-12 \omega _4^4 \omega _5 \left(\omega _4+\omega _5\right){}^5
+   \left(\omega _4 \left(\beta  \omega _5+2 i\right)-2 i \omega _5\right)\right)
+\end{dmath}
 
-\begin{align*}
- \stepcounter{equation}
- \gamma^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow} & =
-  \frac{U^2(\omega_1^2+\frac{U^2}{4})(\omega_2^2+\frac{U^2}{4})(\omega_3^2+\frac{U^2}{4})}{12\omega_1^5\omega_2^2\omega_3^5}\times( \\
-   &\quad6\beta\omega_3^5(\beta\omega_3-i)+6\omega_2^2\omega_3^2(16-7\beta^2\omega_3^2+8i\beta\omega_3+i\beta^3\omega_3^3)+ \tag{\theequation} \\
-   &\quad2\omega_2^4(12-3\beta^2\omega_3^2+6i\beta\omega_3+i\beta^3\omega_3^3)+\omega_2\omega_3^3(24-27\beta^2\omega_3^2+24i\beta\omega_3+2i\beta^3\omega_3^3)+ \\
-   &\quad3\omega_2^3\omega_3(28-9\beta^2\omega_3^2+14i\beta\omega_3+2i\beta^3\omega_3^3)\\
-   & ) + O(U^2)
-\end{align*}
-
-Other spin configurations yield the same result, maybe just with the sign difference.
-
+\subsection{Conclusion}
+The debates about whether it's necessary or not to include greater than second perturbation terms in the dual-fermion expansion thus shall continue.

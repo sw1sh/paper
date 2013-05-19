@@ -1,26 +1,23 @@
 Plan
 =====
-
-* Prelude
-  * Apparatus
-    * Energy representation
-    * Second quantization
-      * Evolution operator
-      * Green functions
-      * Vertex
-    * Finite temperature
-      * Imaginary time
-      * Matsubara frequencies
-    * Path integrals
-      * Action
-      * Grassmann numbers
-    * Diagrams
+* Contents
+* Abstract
+* Introduction: Basic concepts
+  * Second quantization
+  * Interaction representation
+  * Finite temperature
+  * Perturbation expansion
+  * Green functions
+  * Matsubara representation
+  * Feynman Diagrams
+* Theory and Motivation
   * Strongly correlated systems
-    * Hubbard model
-    * Impurity model
-* Anderson model
-* Three-particle Green Function
-* Vertex
-* Spectral representation
-
+  * The Hubbard model
+  * Mean field theory
+  * Beyond DMFT
+  * Dual fermion approach
+* What was done
+  * Preparations
+  * Calculations
+  * Conclusion
 * Bibliography
