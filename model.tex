@@ -56,7 +56,7 @@ and its Fourier transform
 \subsection{Mean field theory}
 A many-body system with interactions is generally very difficult to solve exactly.
 The main idea of MFT is to replace all interactions to any one body with an average or effective interaction - the mean field.
-This reduces any many-body problem into an effective one-body problem.
+This reduces any lattice problem into an effective single-site problem.
 Mean field theory can be applied to a number of physical systems, for example Ising model.
 
 In mean-field theory, the mean field appearing in the single-site problem is a time-independent quantity.
@@ -78,6 +78,18 @@ with the following action
 \begin{equation} S = \sum_{\omega \sigma}(\Delta_\omega-\mu-i\omega)c_{\omega\sigma}^* c_{\omega\sigma} + U\int_0^\beta n_{\uparrow\tau}n_{\downarrow\tau} d\tau \end{equation}
 
 The hybridization function $\Delta_\omega$ plays the role of a $\it{dynamic}$ mean field.
+In other words it is not static compared to the MFT method.
+
+It is obvious that the impurity problem is much simpler than the origiтal lattice one. And an analytical solution can therefore be obtained.
+The only property of the impurity problem entering in the DMFT self-consistent equations is the Green's function $g_{\omega,\sigma}$ in Matsubara space.
+The DMFT approximation for the Green's function of the lattice problem with $N$ sites, corresponds to the following expression
+\begin{equation}
+ G_{\omega,\sigma}^{DMFT} = \frac{1}{N}\sum_k\frac{1}{g_{\omega,\sigma}^{-1}+\Delta_{\omega,\sigma}-\epsilon_k}
+\end{equation}
+where the hybridization function $\Delta$ satisfies the self-consistency condition of DMFT
+\begin{equation}
+ G_{r=0,\omega,\sigma}^{DMFT} = g_{\omega,\sigma}
+\end{equation}
 
 \subsection{Beyond DMFT}
 DMFT approach treats the local spin and orbital fluctuations of the correlated electrons in a correct self-consistent way,
