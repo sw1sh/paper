@@ -1,7 +1,17 @@
 \section{What was done}
 Even though the dual-fermion approach provides us with the convenient diagrammatic technique, every previous work in this field only included
- diagrams up to the second order. On the other hand there is some evidence exists, that already suggests the need of the third order \cite{}.
-This work tries to show whether or not the higher order is necessary by partially computing it.
+ four-legged vertices in the so-called ladder diagrams \cite{0812.2456}
+\begin{align}
+ \diagramDMFTfour
+\end{align}
+
+On the other hand there is some evidence exists, that already suggests the need of the six-legged vertex \cite{1301.7546}.
+
+\begin{align}
+ \diagramDMFTsix
+\end{align}
+
+This work tries to compute the six-legged vertex in both time and frequency representation.
 \subsection{Preparations}
 Following the dual fermion approach we now consider only the local Hamiltonian of the impurity problem
 
@@ -140,11 +150,14 @@ Where $P(\omega)$ is some linear function of $\omega_1\dots\omega_{2n}$ that tog
 \end{itemize}
 
 First we repeat the result of the Appendix B in \cite{0809.1051} and compute $\gamma^{(4)}$. The following final formulas thus obtained
-\begin{equation} \gamma^{\uparrow\uparrow\uparrow\uparrow} = \beta \frac{U^2}{4}\frac{\delta_{\omega_1,-\omega_3}-\delta_{\omega_2,-\omega_3}}{\omega_1^2\omega_2^2}
+\begin{equation} 
+ \label{gamma4}
+ \gamma^{\uparrow\uparrow\uparrow\uparrow} = \beta \frac{U^2}{4}\frac{\delta_{\omega_1,-\omega_3}-\delta_{\omega_2,-\omega_3}}{\omega_1^2\omega_2^2}
   (\omega_1^2+\frac{U^2}{4})(\omega_2^2+\frac{U^2}{4}) 
 \end{equation}
 
 \begin{equation}\begin{aligned}
+ \label{gamma4anti}
  \gamma^{\downarrow\uparrow\downarrow\uparrow} & = 
  U - \frac{U^3}{8}\frac{\omega_1^2+\omega_2^2+\omega_3^2+\omega_4^2}{\omega_1\omega_2\omega_3\omega_4}
    - \frac{3U^5}{16\omega_1\omega_2\omega_3\omega_4} \\
@@ -154,6 +167,7 @@ First we repeat the result of the Appendix B in \cite{0809.1051} and compute $\g
 
 Note the similarities between vertices of 2nd and 3rd order 
 \begin{equation}
+ \label{Gamma4}
  \Gamma_{\tau_1>\tau_2>\tau_3}^{\multido{}{4}{\uparrow}} = -\frac{1}{4\cosh^2{\frac{U\beta}{4}}}\sinh{(\frac{U}{2}(\tau_1-\tau_2))}\sinh{(\frac{U}{2}\tau_3)}
 \end{equation}
 
@@ -178,7 +192,7 @@ Also by taking into account only first two Taylor coefficient by $U$, we conclud
  i.e. has no terms up to the 4th order at least (because it should consist of only even terms), but
  $\gamma^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow}(\omega_1=-\omega_4,\omega_2=-\omega_3,\omega_5=-\omega_6)$ has the 2nd order term and it's equal to
 
-\begin{dmath}
+\begin{dmath}[label={gamma6}]
     -\frac{U^2 \left(U^2+4 \omega _3^2\right){}^2 \left(U^2+4 \omega _4^2\right){}^2 \left(U^2+4 \omega _5^2\right){}^2 }{524288 \omega _3^6 \left(\omega _3-\omega _4\right){}^2 \omega _4^6 \omega _5^5 \left(\omega _4+\omega _5\right){}^2 \left(-\omega
    _3+\omega _4+\omega _5\right){}^3}
    \left(-\left(\beta
@@ -218,4 +232,15 @@ Also by taking into account only first two Taylor coefficient by $U$, we conclud
 \end{dmath}
 
 \subsection{Conclusion}
-The debates about whether it's necessary or not to include greater than second perturbation terms in the dual-fermion expansion thus shall continue.
+In conclusion for presentation purposes we provide the following table that summarizes our main results for the two-particle and three-particle vertices
+\begin{equation}
+\begin{array}{|c|c|c|}
+  \hline
+  & \Gamma(\tau) & \gamma(\omega) \\ \hline
+  \multido{}{4}{\uparrow},\multido{}{4}{\downarrow} & \eqref{Gamma4} & \eqref{gamma4} \\ \hline
+  \downarrow\uparrow\downarrow\uparrow & \text{not present} & \eqref{gamma4anti} \\ \hline
+  \multido{}{6}{\uparrow},\multido{}{6}{\downarrow} & 0 & 0 \\ \hline
+  \downarrow\uparrow\uparrow\downarrow\uparrow\uparrow & \eqref{Gamma6} & \eqref{gamma6} \\ \hline
+\end{array}
+\end{equation}
+%The debates about whether it's necessary or not to include greater than second perturbation terms in the dual-fermion expansion thus shall continue.
