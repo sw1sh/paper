@@ -1,17 +1,170 @@
 \documentclass{beamer}
-\usetheme{Rochester}
 
-\usepackage[utf8]{inputenc}
-\usepackage{default}
+\usepackage[russian]{babel}
+\usepackage{fontspec}
+\setmainfont{Linux Libertine O}
+\setsansfont{Linux Libertine O}
+\setmonofont{Linux Libertine O}
+
+\usepackage{multido}
+\usepackage{fancybox}
 
 \input{diagrams}
 
+\usetheme{Warsaw}
+
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
 \begin{document}
- 
-\begin{frame}{Title}
+\title{Многочастичные функции Грина коррелированных электронов}
+\subtitle{в решеточных структурах}
+\author{Николай Мурзин}
+\institute{Московский Государственный Университет им.Ломоносова}
+\date{23 Мая 2013}
 
-\diagram{1}
+\maketitle
 
+\section{Оглавление}
+\begin{frame}
+ \tableofcontents
+\end{frame}
+
+\section{Введение}
+\subsection{Модель Хаббарда}
+\begin{frame}[squeez]
+  \frametitle{Модель Хаббарда}
+  \begin{equation*}
+    H = \overbrace{-t \sum_{i,j,\sigma}(c_{i,\sigma}^\dagger c_{j,\sigma} + h.c.)}^{\text{Кинетический член}}
+    + \underbrace{U\sum_i n_{i\uparrow}n_{i\downarrow}}_{\text{Кулоновское}\atop\text{взаимодействие}}
+    - \overbrace{\mu\sum_{i,\sigma}c_{i\sigma}^\dagger c_{i\sigma}}^{\text{Обмен частицами}}  
+  \end{equation*}
+  \begin{columns}[C]
+    \column{.1\textwidth}
+    \column{.4\textwidth}
+      \includegraphics[scale=0.2]{img/hubbard.png}
+    \column{.5\textwidth}
+      \begin{tabular}{l}
+	t - Перескоковый интеграл \\
+	\mu - Химический потенциал \\
+      \end{tabular}
+  \end{columns}
+\end{frame}
+
+\subsection{Dynamic Mean Field Theory}
+\begin{frame}
+ \frametitle{Dynamic Mean Field Theory}
+ \begin{block}{DMFT связывает задачу для всей решетки с локальной задачей для одного атома}
+   \begin{equation*} S[c,c^*] = \sum_i S_{loc}[c_i,c_i^*] - \sum_{\omega k \sigma}(\Delta_\omega-\epsilon_k)c_{\omega k\sigma}^* c_{\omega k\sigma} \end{equation*} 
+ \end{block}
+ \begin{center}
+   \includegraphics[scale=0.4]{img/dmft.png}
+ \end{center}
+\end{frame}
+
+\subsection{Устранение нелокальностей}
+\begin{frame}
+ \frametitle{Учёт нелокальных корреляций}
+ \pause
+ \begin{block}{Существует несколько подходов}\pause
+ \begin{itemize}[<+->]
+  \item Взаимодействие электронов на нескольких орбиталях
+  \item Локализация кластеров из близлежащих атомов
+  \item \tikzmark{s1}{Диаграммная техника в дуальном пространстве}\tikzmark{s2}
+ \end{itemize}
+ \end{block}
+ \tikz[overlay,remember picture]\draw<6->[red,ultra thick,rounded corners] ([yshift=.5em]s1.north west) rectangle (s2.south east);
+ \pause
+ Членами разложения являются многочастичные вершины.
+\end{frame}
+
+\section{Диаграммы}
+\subsection{Лестничные диаграммы}
+\begin{frame}
+ \frametitle{Лестничные диаграммы}
+ Известно, что лестничные диаграммы отвечают за поляризацию материала $\chi$.\pause
+
+ Пока предыдущие научные работы учитывали только лестничные диаграммы с двух-частичными вершинами.
+ \begin{center}
+  \diagramDMFTfour
+ \end{center}
+\end{frame}
+
+\subsection{Шестиногие вершины}
+\begin{frame}
+ \frametitle{Трёх-частичные вершины}
+ Но уже существуют предложения использовать диаграммы с трёх-частичными вершинами.\pause
+ \begin{center}
+  \diagramDMFTsix
+ \end{center}
+\end{frame}
+
+\section{Проделанная работа}
+\subsection{Базовые формулы}
+\begin{frame}
+ \frametitle{Формулы для расчётов}
+ \pause
+ \[ H = -\frac{U}{2} \left(n_{\uparrow}+n_{\downarrow}\right) + U n_{\uparrow} n_{\downarrow} + \frac{U}{2} \] \pause
+ \[ G(1\dots n;1'\dots n') = (-1)^n \langle c_1\dots c_n c_{1'}^\dagger\dots c_{n'}^\dagger\rangle \] \pause
+ \[ \Gamma^{(4)} = G(1,2,1',2')+G(1,1')G(2,2')-G(1,2')G(2,1') \] \pause
+ \[ \footnotesize\begin{aligned}
+      \Gamma^{(6)} & = G(1, 2, 3, 1', 2', 3') \\
+      & -2 G(1, 1') G(2, 2') G(3, 3') 
+      +2 G(1, 1') G(2, 3') G(3, 2')
+      -2 G(1, 2') G(2, 3') G(3, 1') \\ 
+      & +2 G(1, 2') G(2, 1') G(3, 3')
+      -2 G(1, 3') G(2, 1') G(3, 2')
+      +2 G(1, 3') G(2, 2') G(3, 1') \\
+      & -G(1, 1') G(2, 3, 2', 3')
+      +G(1, 2') G(2, 3, 1', 3')
+      -G(1, 3') G(2, 3, 1', 2') \\
+      & +G(2, 1') G(1, 3, 2', 3')
+      -G(2, 2') G(1, 3, 1', 3')
+      +G(2, 3') G(1, 3, 1', 2') \\
+      & -G(3, 1') G(1, 2, 2', 3')
+      +G(3, 2') G(1, 2, 1', 3')
+      -G(3, 3') G(1, 2, 1', 2')
+    \end{aligned} 
+ \]
+\end{frame}
+
+\subsection{Временн\'{о}е представление}
+\begin{frame}
+ \frametitle{Выведены формулы во временн\'{о}м представлении}
+ \pause 
+ \[ \Gamma_{\tau_1>\tau_2>\tau_3}^{\multido{}{4}{\uparrow}} = -\frac{1}{4\cosh^2{\frac{U\beta}{4}}}\sinh{(\frac{U}{2}(\tau_1-\tau_2))}\sinh{(\frac{U}{2}\tau_3)} \]
+ \pause
+ \scriptsize\[ \Gamma_{\tau_1>\tau_2>\tau_3>\tau_4>\tau_5}^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow} = 
+    -\frac{1}{4\cosh^3{\frac{U\beta}{4}}}\cosh{(\frac{U}{8}(\frac{\beta}{2}-(\tau_1-\tau_4)))}
+      \sinh{(\frac{U}{2}(\tau_2-\tau_3))}\sinh{(\frac{U}{2}\tau_5)} \]
+ \pause
+  \normalsize\dots и аналогичные им для других порядков следования времени.
+\end{frame}
+
+\subsection{Частотное представление}
+\begin{frame}
+ \frametitle{Матсубаровское представление}
+ \pause
+ \scriptsize\[ \Gamma_\omega^{(2n)} = \sum_{P_i} \int_0^\beta\int_0^{\tau_{i_1}}\dots\int_0^{\tau_{i_{2n-1}}}\Gamma^{(2n)}(\tau_{i_1},\dots,\tau_{i_{2n}})
+  e^{i(\omega_{i_1}\tau_{i_1}+\dots+\omega_{i_{2n}}\tau_{i_{2n}})}d\tau_{i_{2n}}\dots d\tau_{i_1} \]
+ \pause
+ \[ \beta = \frac{1}{k_B T} \] \pause
+ \[ P_i  - \text{Все перестановки временных переменных} \] \pause
+ Для параллельных спинов например, двухчастичная вершина имеет очень простой вид
+ \[ \gamma^{\uparrow\uparrow\uparrow\uparrow} = \beta \frac{U^2}{4}\frac{\delta_{\omega_1,-\omega_3}-\delta_{\omega_2,-\omega_3}}{\omega_1^2\omega_2^2}
+  (\omega_1^2+\frac{U^2}{4})(\omega_2^2+\frac{U^2}{4}) \]
+\end{frame}
+
+\subsection{Конечные результаты}
+\begin{frame}
+ \frametitle{Окончательные результаты для трёх-частичной вершины}\pause
+ Было показано, что вершина обращается в нуль, при параллельных спинах
+ \[ \Gamma^{\multido{}{6}{\uparrow}} = \Gamma^{\multido{}{6}{\downarrow}} = 0 \]\pause
+ Для случая с одним перевернутым спином был рассмотрен частный случай $\tau_1>\tau_2>\tau_3>\tau_4>\tau_5>\tau_6$ с попарно равными частотами 
+  и разложением по степеням $U$ \pause
+ \[ \gamma^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow}(\omega_1=-\omega_2,\omega_3=-\omega_4,\omega_5=-\omega_6) = O(U^2) \] \pause
+ \tiny\begin{align*} & \gamma^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow}(\omega_1=-\omega_4,\omega_2 =-\omega_3,\omega_5=-\omega_6) = \\
+    & \frac{U^2 \left(\frac{U^2}{4}+\omega _3^2\right){}^2 \left(\frac{U^2}{4}+ \omega _4^2\right){}^2 \left(\frac{U^2}{4}+\omega _5^2\right){}^2 }
+      {128 \omega _3^6 \left(\omega _3-\omega _4\right){}^2 \omega _4^6 \omega _5^5 \left(\omega _4+\omega _5\right){}^2 \left(-\omega
+   _3+\omega _4+\omega _5\right){}^3} \left(\beta^2 \omega _5 \left(\beta  \omega _5+2 i\right) \omega _4^5 \dots \right) \end{align*}
 \end{frame}
 
 
