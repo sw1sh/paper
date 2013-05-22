@@ -1,6 +1,6 @@
 \documentclass{beamer}
 
-\usepackage[russian]{babel}
+\usepackage[russian, english]{babel}
 \usepackage{fontspec}
 \setmainfont{Linux Libertine O}
 \setsansfont{Linux Libertine O}
@@ -9,9 +9,14 @@
 \usepackage{multido}
 \usepackage{fancybox}
 
+\usepackage[backend=bibtex]{biblatex}
+
+\bibliography{bibliography.bib}
+
 \input{diagrams}
 
 \usetheme{Warsaw}
+
 
 \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
 \begin{document}
@@ -43,7 +48,7 @@
       \includegraphics[scale=0.2]{img/hubbard.png}
     \column{.5\textwidth}
       \begin{tabular}{l}
-	t - Перескоковый интеграл \\
+	t - Интеграл перескока \\
 	\mu - Химический потенциал \\
       \end{tabular}
   \end{columns}
@@ -73,7 +78,7 @@
  \end{block}
  \tikz[overlay,remember picture]\draw<6->[red,ultra thick,rounded corners] ([yshift=.5em]s1.north west) rectangle (s2.south east);
  \pause
- Членами разложения являются многочастичные вершины.
+ Разложение идёт по многочастичным вершинам локальной задачи.
 \end{frame}
 
 \section{Диаграммы}
@@ -88,10 +93,11 @@
  \end{center}
 \end{frame}
 
-\subsection{Шестиногие вершины}
+\subsection{Вершины шестого порядка}
 \begin{frame}
  \frametitle{Трёх-частичные вершины}
- Но уже существуют предложения использовать диаграммы с трёх-частичными вершинами.\pause
+ Т.к. не существует явного малого параметра разложения, 
+  необходимо проанализировать лестничные диаграммы с вершинами шестого порядка.\footnote{\tiny\fullcite{katanin}}\pause
  \begin{center}
   \diagramDMFTsix
  \end{center}
@@ -100,10 +106,10 @@
 \section{Проделанная работа}
 \subsection{Базовые формулы}
 \begin{frame}
- \frametitle{Формулы для расчётов}
+ \frametitle{Постановка задачи}
  \pause
  \[ H = -\frac{U}{2} \left(n_{\uparrow}+n_{\downarrow}\right) + U n_{\uparrow} n_{\downarrow} + \frac{U}{2} \] \pause
- \[ G(1\dots n;1'\dots n') = (-1)^n \langle c_1\dots c_n c_{1'}^\dagger\dots c_{n'}^\dagger\rangle \] \pause
+ \[ G(1\dots n;1'\dots n') = (-1)^n \langle T c_1\dots c_n c_{1'}^\dagger\dots c_{n'}^\dagger\rangle \] \pause
  \[ \Gamma^{(4)} = G(1,2,1',2')+G(1,1')G(2,2')-G(1,2')G(2,1') \] \pause
  \[ \footnotesize\begin{aligned}
       \Gamma^{(6)} & = G(1, 2, 3, 1', 2', 3') \\
@@ -136,12 +142,12 @@
     -\frac{1}{4\cosh^3{\frac{U\beta}{4}}}\cosh{(\frac{U}{8}(\frac{\beta}{2}-(\tau_1-\tau_4)))}
       \sinh{(\frac{U}{2}(\tau_2-\tau_3))}\sinh{(\frac{U}{2}\tau_5)} \]
  \pause
-  \normalsize\dots и аналогичные им для других порядков следования времени.
+  \normalsize\dots и аналогичные им для других порядков следования операторов.
 \end{frame}
 
 \subsection{Частотное представление}
 \begin{frame}
- \frametitle{Матсубаровское представление}
+ \frametitle{Мацубаровское представление}
  \pause
  \scriptsize\[ \Gamma_\omega^{(2n)} = \sum_{P_i} \int_0^\beta\int_0^{\tau_{i_1}}\dots\int_0^{\tau_{i_{2n-1}}}\Gamma^{(2n)}(\tau_{i_1},\dots,\tau_{i_{2n}})
   e^{i(\omega_{i_1}\tau_{i_1}+\dots+\omega_{i_{2n}}\tau_{i_{2n}})}d\tau_{i_{2n}}\dots d\tau_{i_1} \]
@@ -156,16 +162,28 @@
 \subsection{Конечные результаты}
 \begin{frame}
  \frametitle{Окончательные результаты для трёх-частичной вершины}\pause
- Было показано, что вершина обращается в нуль, при параллельных спинах
+ Был получен не очевидный сходу результат - вершина обращается в нуль, в случае параллельных спинов
  \[ \Gamma^{\multido{}{6}{\uparrow}} = \Gamma^{\multido{}{6}{\downarrow}} = 0 \]\pause
- Для случая с одним перевернутым спином был рассмотрен частный случай $\tau_1>\tau_2>\tau_3>\tau_4>\tau_5>\tau_6$ с попарно равными частотами 
-  и разложением по степеням $U$ \pause
+ Приведем разложение по степеням $U$ вершины с одним перевернутым спином, при $\tau_1>\tau_2>\tau_3>\tau_4>\tau_5>\tau_6$ и с попарно равными частотами для двух случаев
+ \pause
  \[ \gamma^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow}(\omega_1=-\omega_2,\omega_3=-\omega_4,\omega_5=-\omega_6) = O(U^2) \] \pause
  \tiny\begin{align*} & \gamma^{\downarrow\uparrow\uparrow\downarrow\uparrow\uparrow}(\omega_1=-\omega_4,\omega_2 =-\omega_3,\omega_5=-\omega_6) = \\
     & \frac{U^2 \left(\frac{U^2}{4}+\omega _3^2\right){}^2 \left(\frac{U^2}{4}+ \omega _4^2\right){}^2 \left(\frac{U^2}{4}+\omega _5^2\right){}^2 }
       {128 \omega _3^6 \left(\omega _3-\omega _4\right){}^2 \omega _4^6 \omega _5^5 \left(\omega _4+\omega _5\right){}^2 \left(-\omega
-   _3+\omega _4+\omega _5\right){}^3} \left(\beta^2 \omega _5 \left(\beta  \omega _5+2 i\right) \omega _4^5 \dots \right) \end{align*}
+   _3+\omega _4+\omega _5\right){}^3} \left(\beta^2 \omega _5 \left(\beta  \omega _5+2 i\right) \omega _4^5 \dots \right) + O(U^4) \end{align*}
 \end{frame}
 
+\subsection{Выводы}
+\begin{frame}
+ \frametitle{Результаты вкратце}
+ \pause
+ Была написана программа для аналитического вывода выражений для функций Грина и многочастичных вершин, 
+  с помощью которой были получены
+ \begin{itemize}
+  \item Точные формулы для двухчастичной вершины во временном и частотном представлении \pause
+  \item Обращение в нуль трёхчастичной вершины с параллельными спинами \pause
+  \item Выражения для трёхчастичной вершины с антипараллельными спинами
+ \end{itemize}
+\end{frame}
 
 \end{document}
